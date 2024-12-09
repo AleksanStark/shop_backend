@@ -7,8 +7,8 @@ const stripe = require("stripe")(
 const app = express();
 
 app.use(express.json());
-app.use(pino());
 app.use(cors());
+app.use(pino());
 
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
@@ -24,14 +24,5 @@ app.post("/checkout", async (req, res) => {
     console.log(err);
   }
 });
-
-// app.get("/checkout", async (req, res) => {
-//   try {
-//     const session = await stripe.checkout.sessions.retrieve(req.body);
-//     console.log(session);
-//   } catch (error) {
-//     console.log(err);
-//   }
-// });
 
 app.listen(8000, () => console.log("server runnig on 8000 port"));
