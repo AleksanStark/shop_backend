@@ -11,24 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use(pino());
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", "*"], // Разрешить собственный источник и все остальные (можно уточнить)
-        styleSrc: ["'self'", "'unsafe-inline'"], // Разрешить встроенные стили и собственный источник
-        scriptSrc: [
-          "'self'",
-          "https://checkout.stripe.com",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-        ], // Разрешить Stripe, встроенные скрипты и eval
-        connectSrc: ["'self'", "https://checkout.stripe.com"], // Разрешить Stripe и собственные подключения
-        frameSrc: ["'self'", "https://checkout.stripe.com"], // Разрешить фреймы Stripe
-      },
-    },
-  })
-);
+app.use(helmet());
 
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
