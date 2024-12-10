@@ -4,11 +4,31 @@ const pino = require("pino-http");
 const stripe = require("stripe")(
   "sk_test_51QH1RuAGiLDyLsr1ht1TxBc3rUb483621kVYgKO2he4C75W6jZdFrr2DwjRFoGdN85fhboRyX636gHHPiNbr14yf001GoOfBqp"
 );
+const helmet = require("helmet");
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use(pino());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", "*"], // Разрешить собственный источник и все остальные (можно уточнить)
+        styleSrc: ["'self'", "'unsafe-inline'"], // Разрешить встроенные стили и собственный источник
+        scriptSrc: [
+          "'self'",
+          "https://checkout.stripe.com",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+        ], // Разрешить Stripe, встроенные скрипты и eval
+        connectSrc: ["'self'", "https://checkout.stripe.com"], // Разрешить Stripe и собственные подключения
+        frameSrc: ["'self'", "https://checkout.stripe.com"], // Разрешить фреймы Stripe
+      },
+    },
+  })
+);
 
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
