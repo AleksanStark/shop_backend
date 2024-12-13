@@ -37,7 +37,7 @@ async def create_checkout_session(data: Items) -> dict:
         )
 
         # Return the session URL
-        return {"checkoutUrl": session.url, "sessionId": session.id}
+        return {"sessionId": session.id}
     except Exception as e:
         # Log and return an error response
         print(data)
