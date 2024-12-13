@@ -2,6 +2,9 @@ from litestar import Litestar, post, MediaType
 from litestar.config.cors import CORSConfig
 from pydantic import BaseModel
 import stripe
+import uvicorn
+
+
 
 # Stripe API Key
 stripe.api_key = "sk_test_51QH1RuAGiLDyLsr1ht1TxBc3rUb483621kVYgKO2he4C75W6jZdFrr2DwjRFoGdN85fhboRyX636gHHPiNbr14yf001GoOfBqp"
@@ -43,7 +46,7 @@ async def create_checkout_session(data: Items) -> dict:
 
 # Initialize Litestar application
 app = Litestar(route_handlers=[create_checkout_session], cors_config=cors_config)
+uvicorn.run(app, host="0.0.0.0", port=8000)
 
-if __name__ == "__main__":
-    import uvicorn 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+  
