@@ -11,7 +11,7 @@ stripe.api_key = "sk_test_51QH1RuAGiLDyLsr1ht1TxBc3rUb483621kVYgKO2he4C75W6jZdFr
 
 # CORS Configuration
 cors_config = CORSConfig(
-    allow_origins=["http://localhost:3000", "https://shop-seven-liart.vercel.app/"],  # Replace with actual frontend origin
+    allow_origins=["http://localhost:3000", "https://shop-seven-liart.vercel.app"],  # Replace with actual frontend origin
     allow_methods=["POST", "OPTIONS"],  # Restrict methods if needed
     allow_credentials=True,
     allow_headers=["*"],
@@ -32,8 +32,8 @@ async def create_checkout_session(data: Items) -> dict:
         session = stripe.checkout.Session.create(
             line_items=data.line_items,
             mode="payment",
-            success_url="http://localhost:3000/success",
-            cancel_url="http://localhost:3000/cancel",
+            success_url="https://shop-seven-liart.vercel.app//success",
+            cancel_url="https://shop-seven-liart.vercel.app//cancel",
         )
 
         # Return the session URL
