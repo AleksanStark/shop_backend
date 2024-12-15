@@ -12,7 +12,7 @@ stripe.api_key = "sk_test_51QH1RuAGiLDyLsr1ht1TxBc3rUb483621kVYgKO2he4C75W6jZdFr
 # CORS Configuration
 cors_config = CORSConfig(
     allow_origins=["http://localhost:3000", "https://shop-seven-liart.vercel.app/"],  # Replace with actual frontend origin
-    allow_methods=["*"],  # Restrict methods if needed
+    allow_methods=["POST", "OPTIONS"],  # Restrict methods if needed
     allow_credentials=True,
     allow_headers=["*"],
 )
